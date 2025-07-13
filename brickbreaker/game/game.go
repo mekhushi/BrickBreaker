@@ -29,7 +29,7 @@ type Game struct {
 	bricks  []*Brick
 	lives   int
 	score   int
-	whitePx *ebiten.Image // 1×1 white pixel used for all rectangles
+	whitePx *ebiten.Image 
 }
 
 // Constructor ───────────────────────────────────────────────
@@ -58,7 +58,7 @@ func NewGame() *Game {
 }
 
 // ────────────────────────────────────────────────────────────
-// Update – game logic (called every tick)
+
 func (g *Game) Update() error {
 	g.paddle.Update()
 
@@ -101,24 +101,24 @@ func (g *Game) Update() error {
 	if g.ball.Y-g.ball.Radius > ScreenHeight {
 		g.lives--
 		if g.lives <= 0 {
-			*g = *NewGame() // restart entire game
+			*g = *NewGame() 
 			return nil
 		}
-		g.ball.Reset() // just reset ball
+		g.ball.Reset() 
 	}
 
 	return nil
 }
 
 // ────────────────────────────────────────────────────────────
-// Draw – render everything
-func (g *Game) Draw(screen *ebiten.Image) {
-	screen.Fill(color.RGBA{30, 30, 30, 255}) // background
 
-	// paddle
+func (g *Game) Draw(screen *ebiten.Image) {
+	screen.Fill(color.RGBA{30, 30, 30, 255}) 
+
+	
 	g.drawRect(screen, g.paddle.X, g.paddle.Y, g.paddle.Width, g.paddle.Height, color.White)
 
-	// ball
+	
 	g.drawRect(screen, g.ball.X-g.ball.Radius, g.ball.Y-g.ball.Radius, g.ball.Radius*2, g.ball.Radius*2,
 		color.RGBA{255, 100, 100, 255})
 
@@ -137,11 +137,11 @@ func (g *Game) Layout(outsideW, outsideH int) (int, int) {
 	return ScreenWidth, ScreenHeight
 }
 
-// helper: draw colored rectangle via 1×1 white pixel
+
 func (g *Game) drawRect(dst *ebiten.Image, x, y, w, h float64, clr color.Color) {
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(w, h)      // scale first
-	op.GeoM.Translate(x, y)  // then move into place
+	op.GeoM.Scale(w, h)      
+	op.GeoM.Translate(x, y)  
 	r, gcol, b, a := clr.RGBA()
 	op.ColorM.Scale(float64(r)/0xffff, float64(gcol)/0xffff, float64(b)/0xffff, float64(a)/0xffff)
 	dst.DrawImage(g.whitePx, op)
