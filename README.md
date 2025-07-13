@@ -17,7 +17,7 @@ Simple controls, smooth gameplay, and no installation needed — just download a
 ---
 ## ScreenShot
 
-![Gameplay Screenshot](screenshot.png)
+![Gameplay Screenshot](Assets/ScreenShot1.png)
 
 
 ## ▶️ How to Play
